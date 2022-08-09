@@ -36,20 +36,37 @@ public class ShowAllAddedFilmsTest {
     }
 
     @Test
-    public void showLastAddedAboveLimit() {
+    public void showLastAddedEqualsLimit() {
         Manager manager = new Manager(3);
+        manager.addFilm("film1");
+        manager.addFilm("film2");
+        manager.addFilm("film3");
+
+
+        String[] actual = manager.findLast();
+        String[] expected = {
+                "film3",
+                "film2",
+                "film1",
+        };
+        assertArrayEquals(expected, actual);
+    }
+
+    @Test
+    public void showLastAddedBelowLimit() {
+        Manager manager = new Manager(7);
         manager.addFilm("film1");
         manager.addFilm("film2");
         manager.addFilm("film3");
         manager.addFilm("film4");
         manager.addFilm("film5");
 
-
         String[] actual = manager.findLast();
         String[] expected = {
-                "film5",
-                "film4",
-                "film3",
+                "film5", "film4",
+                "film3", "film2",
+                "film1",
+
         };
         assertArrayEquals(expected, actual);
     }
